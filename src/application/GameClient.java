@@ -52,7 +52,6 @@ public class GameClient extends Application {
                 }
                 System.out.println(in.nextLine());
                 while (true) {
-//                    System.out.println(Controller.winner);
                     if (player == 1) {
                         try {
                             waitCt();
@@ -91,7 +90,6 @@ public class GameClient extends Application {
     }
 
     public void sendMsg() {
-//        System.out.println("send : "+selectX+" , "+selectY);
         out.println(selectX);
         out.flush();
         out.println(selectY);

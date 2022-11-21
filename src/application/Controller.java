@@ -28,9 +28,6 @@ public class Controller implements Initializable {
     static int player = 1;
     static int winner = 0;
 
-//    @FXML
-//    private DialogPane win_square;
-
     @FXML
     Pane base_square;
 
@@ -64,7 +61,6 @@ public class Controller implements Initializable {
                     }
                 }
             }
-//            System.out.println("numLine: "+numLine+" , numCircle: "+numCircle);
             if (numCircle > numLine &&player == -1) {
                 GameClient.selectX = x;
                 GameClient.selectY = y;
@@ -86,7 +82,6 @@ public class Controller implements Initializable {
             }
             numCircle = 0;
             numLine = 0;
-//            System.out.println("winner is : "+winner);
         }else {
             System.out.println("Invalid click!");
         }
@@ -94,7 +89,6 @@ public class Controller implements Initializable {
 
 
     void updateChess (int x, int y, int player) {
-//        System.out.println("receive :"+x+" , "+y);
         if (chessBoard[x][y]==EMPTY) {
             switch (player) {
                 case PLAY_1:
@@ -120,7 +114,6 @@ public class Controller implements Initializable {
             }
         }
         checkWin(chessBoard);
-//        System.out.println(winner);
     }
 
     void checkTie(){
@@ -134,7 +127,6 @@ public class Controller implements Initializable {
                 }
             }
             if (k==8){
-//                System.out.println("Sure");
                 int i = 0;
                 int j = 0;
                 for (i = 0; i < chessBoard.length; i++) {
@@ -149,7 +141,6 @@ public class Controller implements Initializable {
                 if (winner == 0){
                     winner = 2;
                 }
-//                System.out.println(i+ " + "+j);
                 chessBoard[i-1][j-1] = 0;
             }
         }else if (player==1||player==-1){
@@ -230,6 +221,25 @@ public class Controller implements Initializable {
         }
     }
 
+    private void drawLine (int i, int j) {
+        Line line_a = new Line();
+        Line line_b = new Line();
+        base_square.getChildren().add(line_a);
+        base_square.getChildren().add(line_b);
+        line_a.setStartX(i * BOUND + OFFSET * 1.5);
+        line_a.setStartY(j * BOUND + OFFSET * 1.5);
+        line_a.setEndX((i + 1) * BOUND + OFFSET * 0.5);
+        line_a.setEndY((j + 1) * BOUND + OFFSET * 0.5);
+        line_a.setStroke(Color.BLUE);
+
+        line_b.setStartX((i + 1) * BOUND + OFFSET * 0.5);
+        line_b.setStartY(j * BOUND + OFFSET * 1.5);
+        line_b.setEndX(i * BOUND + OFFSET * 1.5);
+        line_b.setEndY((j + 1) * BOUND + OFFSET * 0.5);
+        line_b.setStroke(Color.BLUE);
+        flag[i][j] = true;
+    }
+
     void winShow(){
         if (winner == player){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -265,25 +275,5 @@ public class Controller implements Initializable {
         circle.setFill(Color.TRANSPARENT);
         flag[i][j] = true;
 
-    }
-
-    private void drawLine (int i, int j) {
-        Line line_a = new Line();
-        Line line_b = new Line();
-//
-        base_square.getChildren().add(line_a);
-        base_square.getChildren().add(line_b);
-        line_a.setStartX(i * BOUND + OFFSET * 1.5);
-        line_a.setStartY(j * BOUND + OFFSET * 1.5);
-        line_a.setEndX((i + 1) * BOUND + OFFSET * 0.5);
-        line_a.setEndY((j + 1) * BOUND + OFFSET * 0.5);
-        line_a.setStroke(Color.BLUE);
-
-        line_b.setStartX((i + 1) * BOUND + OFFSET * 0.5);
-        line_b.setStartY(j * BOUND + OFFSET * 1.5);
-        line_b.setEndX(i * BOUND + OFFSET * 1.5);
-        line_b.setEndY((j + 1) * BOUND + OFFSET * 0.5);
-        line_b.setStroke(Color.BLUE);
-        flag[i][j] = true;
     }
 }

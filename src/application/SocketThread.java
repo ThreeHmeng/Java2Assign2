@@ -77,7 +77,6 @@ public class SocketThread implements Runnable {
                         break;
                     }
                     y = Integer.parseInt(in2.nextLine());
-//                System.out.println("what :"+x+" , "+y);
                     out1.println(x);
                     out1.flush();
                     out1.println(y);
